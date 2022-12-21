@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "hTIAJ39PGAgGCQjdkPSXliptd+gg2twqsJpCwSngzRM=",
+  "Source": "ReviewSite_WebAPI",
+  "BasePath": "_content/ReviewSite_WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
