@@ -42,6 +42,10 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<ProductDTO> CreateProduct([FromBody]ProductDTO productDTO)
         {
+            if (ProductStore.productList.FirstOrDefault(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
+            {
+                ModelState.AddModelError("", "Product name already exists");
+            }
             if(productDTO == null)
             {
                 return BadRequest(productDTO);
@@ -54,6 +58,25 @@ namespace ReviewSite_WebAPI.Controllers
             ProductStore.productList.Add(productDTO);
 
             return CreatedAtRoute("GetProduct", new { id = productDTO.Id }, productDTO);
+        }
+
+        [HttpDelete("{id:int}", Name = "DeleteProduct")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeleteProduct(int id)
+        {
+            if(id == 0)
+            {
+                return BadRequest();
+            }
+            var product = ProductStore.productList.FirstOrDefault(u => u.Id == id);
+            if(product == null)
+            {
+                return NotFound();
+            }
+            ProductStore.productList.Remove(product);
+            return NoContent();
         }
     }
 }
