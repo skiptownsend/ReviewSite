@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace ReviewSite_WebAPI.Tests
 {
-    internal class ReviewSiteAPIControllerTests
+    [TestFixture]
+    public class ReviewSiteAPIControllerTests
     {
+
     }
 }
