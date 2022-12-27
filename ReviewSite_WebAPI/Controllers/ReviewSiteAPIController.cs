@@ -48,7 +48,7 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ProductDTO> CreateProduct([FromBody]ProductDTO productDTO)
+        public ActionResult<ProductDTO> CreateProduct([FromBody]ProductCreateDTO productDTO)
         {
             if(_db.Products.FirstOrDefault(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
             {
@@ -59,20 +59,15 @@ namespace ReviewSite_WebAPI.Controllers
             {
                 return BadRequest(productDTO);
             }
-            if(productDTO.Id > 0)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
             Product model = new()
             {
-                Id = productDTO.Id,
                 Name = productDTO.Name,
                 Description = productDTO.Description,
                 ImageUrl = productDTO.ImageUrl
             };
             _db.Products.Add(model);
             _db.SaveChanges();
-            return CreatedAtRoute("GetProduct", new { id = productDTO.Id }, productDTO);
+            return CreatedAtRoute("GetProduct", new { id = model.Id }, model);
         }
 
         [HttpDelete("{id:int}", Name = "DeleteProduct")]
@@ -98,7 +93,7 @@ namespace ReviewSite_WebAPI.Controllers
         [HttpPut("{id:int}", Name = "UpdateProduct")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdateProduct(int id, [FromBody] ProductDTO productDTO)
+        public IActionResult UpdateProduct(int id, [FromBody] ProductUpdateDTO productDTO)
         {
             if(productDTO == null || id != productDTO.Id)
             {
