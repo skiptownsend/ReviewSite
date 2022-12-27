@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using ReviewSite_WebAPI.Data;
 using ReviewSite_WebAPI.Models;
 using ReviewSite_WebAPI.Models.DTO;
@@ -9,12 +10,19 @@ namespace ReviewSite_WebAPI.Controllers
     [ApiController]
     public class ReviewSiteAPIController : ControllerBase
     {
+        private readonly ApplicationDbContext _db;
+        private readonly ILogger<ReviewSiteAPIController> _logger;
+        public ReviewSiteAPIController(ApplicationDbContext db, ILogger<ReviewSiteAPIController> logger)
+        {
+            _db = db;
+            _logger = logger;
+        }
+
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<ProductDTO>> GetProducts()
+        public ActionResult<IEnumerable<ProductDTO>> GetProducts() 
         {
-            return Ok(ProductStore.productList);
-            
+            return Ok(_db.Products.ToList());
         }
 
         [HttpGet("{id:int}", Name = "GetProduct")]
@@ -25,14 +33,14 @@ namespace ReviewSite_WebAPI.Controllers
         {
             if(id == 0)
             {
+                _logger.LogError("Get Product Error with Id " + id);
                 return BadRequest();
             }
-            var product = ProductStore.productList.FirstOrDefault(u => u.Id == id);
+            var product = _db.Products.FirstOrDefault(u => u.Id == id);
             if(product == null)
             {
                 return NotFound();
             }
-
             return Ok(product);
         }
 
@@ -42,9 +50,10 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public ActionResult<ProductDTO> CreateProduct([FromBody]ProductDTO productDTO)
         {
-            if (ProductStore.productList.FirstOrDefault(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
+            if(_db.Products.FirstOrDefault(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
             {
-                ModelState.AddModelError("", "Product name already exists");
+                _logger.LogError("Create Product Error with Name " + productDTO.Name);
+                ModelState.AddModelError("", "Product name already exists!");
             }
             if(productDTO == null)
             {
@@ -54,9 +63,15 @@ namespace ReviewSite_WebAPI.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            productDTO.Id = ProductStore.productList.OrderByDescending(u => u.Id).FirstOrDefault().Id + 1;
-            ProductStore.productList.Add(productDTO);
-
+            Product model = new()
+            {
+                Id = productDTO.Id,
+                Name = productDTO.Name,
+                Description = productDTO.Description,
+                ImageUrl = productDTO.ImageUrl
+            };
+            _db.Products.Add(model);
+            _db.SaveChanges();
             return CreatedAtRoute("GetProduct", new { id = productDTO.Id }, productDTO);
         }
 
@@ -70,12 +85,34 @@ namespace ReviewSite_WebAPI.Controllers
             {
                 return BadRequest();
             }
-            var product = ProductStore.productList.FirstOrDefault(u => u.Id == id);
+            var product = _db.Products.FirstOrDefault(u => u.Id == id);
             if(product == null)
             {
                 return NotFound();
             }
-            ProductStore.productList.Remove(product);
+            _db.Products.Remove(product);
+            _db.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpPut("{id:int}", Name = "UpdateProduct")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdateProduct(int id, [FromBody] ProductDTO productDTO)
+        {
+            if(productDTO == null || id != productDTO.Id)
+            {
+                return BadRequest();
+            }
+            Product model = new()
+            {
+                Id = productDTO.Id,
+                Name = productDTO.Name,
+                Description = productDTO.Description,
+                ImageUrl = productDTO.ImageUrl
+            };
+            _db.Products.Update(model);
+            _db.SaveChanges();
             return NoContent();
         }
     }
