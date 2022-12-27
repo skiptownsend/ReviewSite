@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ReviewSite_WebAPI.Data;
 using ReviewSite_WebAPI.Models;
 using ReviewSite_WebAPI.Models.DTO;
@@ -20,23 +21,23 @@ namespace ReviewSite_WebAPI.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<IEnumerable<ProductDTO>> GetProducts() 
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts() 
         {
-            return Ok(_db.Products.ToList());
+            return Ok(await _db.Products.ToListAsync());
         }
 
         [HttpGet("{id:int}", Name = "GetProduct")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<ProductDTO> GetProduct(int id)
+        public async Task<ActionResult<ProductDTO>> GetProduct(int id)
         {
             if(id == 0)
             {
                 _logger.LogError("Get Product Error with Id " + id);
                 return BadRequest();
             }
-            var product = _db.Products.FirstOrDefault(u => u.Id == id);
+            var product = await _db.Products.FirstOrDefaultAsync(u => u.Id == id);
             if(product == null)
             {
                 return NotFound();
@@ -48,9 +49,9 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<ProductDTO> CreateProduct([FromBody]ProductCreateDTO productDTO)
+        public async Task<ActionResult<ProductDTO>> CreateProduct([FromBody]ProductCreateDTO productDTO)
         {
-            if(_db.Products.FirstOrDefault(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
+            if(await _db.Products.FirstOrDefaultAsync(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
             {
                 _logger.LogError("Create Product Error with Name " + productDTO.Name);
                 ModelState.AddModelError("", "Product name already exists!");
@@ -65,8 +66,8 @@ namespace ReviewSite_WebAPI.Controllers
                 Description = productDTO.Description,
                 ImageUrl = productDTO.ImageUrl
             };
-            _db.Products.Add(model);
-            _db.SaveChanges();
+            await _db.Products.AddAsync(model);
+            await _db.SaveChangesAsync();
             return CreatedAtRoute("GetProduct", new { id = model.Id }, model);
         }
 
@@ -74,26 +75,26 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeleteProduct(int id)
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             if(id == 0)
             {
                 return BadRequest();
             }
-            var product = _db.Products.FirstOrDefault(u => u.Id == id);
+            var product = await _db.Products.FirstOrDefaultAsync(u => u.Id == id);
             if(product == null)
             {
                 return NotFound();
             }
             _db.Products.Remove(product);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return NoContent();
         }
 
         [HttpPut("{id:int}", Name = "UpdateProduct")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult UpdateProduct(int id, [FromBody] ProductUpdateDTO productDTO)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDTO)
         {
             if(productDTO == null || id != productDTO.Id)
             {
@@ -107,7 +108,7 @@ namespace ReviewSite_WebAPI.Controllers
                 ImageUrl = productDTO.ImageUrl
             };
             _db.Products.Update(model);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return NoContent();
         }
     }
