@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ReviewSite_WebAPI;
 using ReviewSite_WebAPI.Data;
 using Serilog;
 
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
     .WriteTo.File("Logs/reviewSiteLogs.txt", rollingInterval: RollingInterval.Month).CreateLogger();
 builder.Host.UseSerilog();

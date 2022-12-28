@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using ReviewSite_WebAPI.Data;
 using ReviewSite_WebAPI.Models;
@@ -12,10 +14,12 @@ namespace ReviewSite_WebAPI.Controllers
     public class ReviewSiteAPIController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
+        private readonly IMapper _mapper;
         private readonly ILogger<ReviewSiteAPIController> _logger;
-        public ReviewSiteAPIController(ApplicationDbContext db, ILogger<ReviewSiteAPIController> logger)
+        public ReviewSiteAPIController(ApplicationDbContext db, IMapper mapper, ILogger<ReviewSiteAPIController> logger)
         {
             _db = db;
+            _mapper = mapper;
             _logger = logger;
         }
 
@@ -23,7 +27,8 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts() 
         {
-            return Ok(await _db.Products.ToListAsync());
+            IEnumerable<Product> productList = await _db.Products.ToListAsync();
+            return Ok(_mapper.Map<List<ProductDTO>>(productList));
         }
 
         [HttpGet("{id:int}", Name = "GetProduct")]
@@ -42,30 +47,25 @@ namespace ReviewSite_WebAPI.Controllers
             {
                 return NotFound();
             }
-            return Ok(product);
+            return Ok(_mapper.Map<ProductDTO>(product));
         }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ProductDTO>> CreateProduct([FromBody]ProductCreateDTO productDTO)
+        public async Task<ActionResult<ProductDTO>> CreateProduct([FromBody]ProductCreateDTO createDTO)
         {
-            if(await _db.Products.FirstOrDefaultAsync(u => u.Name.ToLower() == productDTO.Name.ToLower()) != null)
+            if(await _db.Products.FirstOrDefaultAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
             {
-                _logger.LogError("Create Product Error with Name " + productDTO.Name);
+                _logger.LogError("Create Product Error with Name " + createDTO.Name);
                 ModelState.AddModelError("", "Product name already exists!");
             }
-            if(productDTO == null)
+            if(createDTO == null)
             {
-                return BadRequest(productDTO);
+                return BadRequest(createDTO);
             }
-            Product model = new()
-            {
-                Name = productDTO.Name,
-                Description = productDTO.Description,
-                ImageUrl = productDTO.ImageUrl
-            };
+            Product model = _mapper.Map<Product>(createDTO);
             await _db.Products.AddAsync(model);
             await _db.SaveChangesAsync();
             return CreatedAtRoute("GetProduct", new { id = model.Id }, model);
@@ -94,19 +94,13 @@ namespace ReviewSite_WebAPI.Controllers
         [HttpPut("{id:int}", Name = "UpdateProduct")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO productDTO)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductUpdateDTO updateDTO)
         {
-            if(productDTO == null || id != productDTO.Id)
+            if(updateDTO == null || id != updateDTO.Id)
             {
                 return BadRequest();
             }
-            Product model = new()
-            {
-                Id = productDTO.Id,
-                Name = productDTO.Name,
-                Description = productDTO.Description,
-                ImageUrl = productDTO.ImageUrl
-            };
+            Product model = _mapper.Map<Product>(updateDTO);
             _db.Products.Update(model);
             await _db.SaveChangesAsync();
             return NoContent();
