@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using ReviewSite_WebAPI;
 using ReviewSite_WebAPI.Data;
+using ReviewSite_WebAPI.Repository;
+using ReviewSite_WebAPI.Repository.IRepository;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
     .WriteTo.File("Logs/reviewSiteLogs.txt", rollingInterval: RollingInterval.Month).CreateLogger();

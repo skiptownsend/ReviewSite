@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using ReviewSite_WebAPI.Data;
 using ReviewSite_WebAPI.Models;
 using ReviewSite_WebAPI.Models.DTO;
+using ReviewSite_WebAPI.Repository.IRepository;
 
 namespace ReviewSite_WebAPI.Controllers
 {
@@ -16,18 +17,20 @@ namespace ReviewSite_WebAPI.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
         private readonly ILogger<ReviewSiteAPIController> _logger;
-        public ReviewSiteAPIController(ApplicationDbContext db, IMapper mapper, ILogger<ReviewSiteAPIController> logger)
+        private readonly IProductRepository _dbProduct;
+        public ReviewSiteAPIController(ApplicationDbContext db, IMapper mapper, ILogger<ReviewSiteAPIController> logger, IProductRepository dbProduct)
         {
             _db = db;
             _mapper = mapper;
             _logger = logger;
+            _dbProduct = dbProduct;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts() 
         {
-            IEnumerable<Product> productList = await _db.Products.ToListAsync();
+            IEnumerable<Product> productList = await _dbProduct.GetAllAsync();
             return Ok(_mapper.Map<List<ProductDTO>>(productList));
         }
 
@@ -42,7 +45,7 @@ namespace ReviewSite_WebAPI.Controllers
                 _logger.LogError("Get Product Error with Id " + id);
                 return BadRequest();
             }
-            var product = await _db.Products.FirstOrDefaultAsync(u => u.Id == id);
+            var product = await _dbProduct.GetAsync(u => u.Id == id);
             if(product == null)
             {
                 return NotFound();
@@ -56,7 +59,7 @@ namespace ReviewSite_WebAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ProductDTO>> CreateProduct([FromBody]ProductCreateDTO createDTO)
         {
-            if(await _db.Products.FirstOrDefaultAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
+            if(await _dbProduct.GetAsync(u => u.Name.ToLower() == createDTO.Name.ToLower()) != null)
             {
                 _logger.LogError("Create Product Error with Name " + createDTO.Name);
                 ModelState.AddModelError("", "Product name already exists!");
@@ -66,8 +69,9 @@ namespace ReviewSite_WebAPI.Controllers
                 return BadRequest(createDTO);
             }
             Product model = _mapper.Map<Product>(createDTO);
-            await _db.Products.AddAsync(model);
-            await _db.SaveChangesAsync();
+            
+            await _dbProduct.CreateAsync(model);
+
             return CreatedAtRoute("GetProduct", new { id = model.Id }, model);
         }
 
@@ -81,13 +85,13 @@ namespace ReviewSite_WebAPI.Controllers
             {
                 return BadRequest();
             }
-            var product = await _db.Products.FirstOrDefaultAsync(u => u.Id == id);
+            var product = await _dbProduct.GetAsync(u => u.Id == id);
             if(product == null)
             {
                 return NotFound();
             }
-            _db.Products.Remove(product);
-            await _db.SaveChangesAsync();
+            await _dbProduct.RemoveAsync(product);
+
             return NoContent();
         }
 
@@ -101,8 +105,9 @@ namespace ReviewSite_WebAPI.Controllers
                 return BadRequest();
             }
             Product model = _mapper.Map<Product>(updateDTO);
-            _db.Products.Update(model);
-            await _db.SaveChangesAsync();
+
+            await _dbProduct.UpdateAsync(model);
+
             return NoContent();
         }
     }
