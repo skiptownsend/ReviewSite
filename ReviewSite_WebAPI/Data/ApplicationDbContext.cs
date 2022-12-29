@@ -11,6 +11,7 @@ namespace ReviewSite_WebAPI.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +62,16 @@ namespace ReviewSite_WebAPI.Data
                     Name = "Yellow T-Shirt",
                     Description = "Lorem ipsum dolor sit amet.",
                     ImageUrl = "./Images/yellow_t-shirt.jpg",
+                    CreatedDate = DateTime.Now
+                });
+
+            modelBuilder.Entity<ProductReview>().HasData(
+                new ProductReview()
+                {
+                    Id = 1,
+                    ProductId = 1,
+                    ReviewerName = "John Smith",
+                    Review = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sociis natoque penatibus et magnis dis parturient montes nascetur. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac.",
                     CreatedDate = DateTime.Now
                 });
         }

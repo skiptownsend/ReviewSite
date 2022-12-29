@@ -13,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
 });
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductReviewRepository, ProductReviewRepository>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
     .WriteTo.File("Logs/reviewSiteLogs.txt", rollingInterval: RollingInterval.Month).CreateLogger();

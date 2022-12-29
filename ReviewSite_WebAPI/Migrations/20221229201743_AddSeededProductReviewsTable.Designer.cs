@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReviewSite_WebAPI.Data;
 
@@ -11,9 +12,10 @@ using ReviewSite_WebAPI.Data;
 namespace ReviewSite_WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221229201743_AddSeededProductReviewsTable")]
+    partial class AddSeededProductReviewsTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,7 +58,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(2903),
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5784),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/white_t-shirt.jpg",
                             Name = "White T-Shirt",
@@ -65,7 +67,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(2929),
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5815),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/black_t-shirt.jpg",
                             Name = "Black T-Shirt",
@@ -74,7 +76,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(2931),
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5817),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/red_t-shirt.jpg",
                             Name = "Red T-Shirt",
@@ -83,7 +85,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(2933),
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5819),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/blue_t-shirt.jpg",
                             Name = "Blue T-Shirt",
@@ -92,7 +94,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(2934),
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5821),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/maroon_t-shirt.jpg",
                             Name = "Maroon T-Shirt",
@@ -101,7 +103,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(2936),
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5823),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/yellow_t-shirt.jpg",
                             Name = "Yellow T-Shirt",
@@ -120,9 +122,6 @@ namespace ReviewSite_WebAPI.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Review")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,31 +135,17 @@ namespace ReviewSite_WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductId");
-
                     b.ToTable("ProductReviews");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2022, 12, 29, 14, 56, 2, 981, DateTimeKind.Local).AddTicks(3024),
-                            ProductId = 1,
+                            CreatedDate = new DateTime(2022, 12, 29, 13, 17, 42, 834, DateTimeKind.Local).AddTicks(5907),
                             Review = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sociis natoque penatibus et magnis dis parturient montes nascetur. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac.",
                             ReviewerName = "John Smith",
                             UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
-                });
-
-            modelBuilder.Entity("ReviewSite_WebAPI.Models.ProductReview", b =>
-                {
-                    b.HasOne("ReviewSite_WebAPI.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }
