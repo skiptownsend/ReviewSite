@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
-using ReviewSite_WebAPI.Models;
-using ReviewSite_WebAPI.Models.DTO;
+using ReviewSite_Web.Models;
+using ReviewSite_Web.Models.DTO;
 
-namespace ReviewSite_WebAPI
+namespace ReviewSite_Web
 {
     public class MappingConfig : Profile
     {
         public MappingConfig()
         {
-            CreateMap<Product, ProductDTO>().ReverseMap();
-            CreateMap<Product, ProductCreateDTO>().ReverseMap();
-            CreateMap<Product, ProductUpdateDTO>().ReverseMap();
+            CreateMap<ProductDTO, ProductCreateDTO>().ReverseMap();
+            CreateMap<ProductDTO, ProductUpdateDTO>().ReverseMap();
 
-            CreateMap<ProductReview, ProductReviewDTO>().ReverseMap();
-            CreateMap<ProductReview, ProductReviewCreateDTO>().ReverseMap();
-            CreateMap<ProductReview, ProductReviewUpdateDTO>().ReverseMap();
+            CreateMap<ProductReviewDTO, ProductReviewCreateDTO>().ReverseMap();
+            CreateMap<ProductReviewDTO, ProductReviewUpdateDTO>().ReverseMap();
         }
     }
 }
