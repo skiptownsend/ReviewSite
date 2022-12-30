@@ -7354,9 +7354,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_WebAPI.csproj",
-      "projectName": "ReviewSite_WebAPI",
-      "projectPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_WebAPI.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_API.csproj",
+      "projectName": "ReviewSite_API",
+      "projectPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_API.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\obj\\",
       "projectStyle": "PackageReference",

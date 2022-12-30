@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewSite_WebAPI", "ReviewSite_WebAPI\ReviewSite_WebAPI.csproj", "{9601A5D7-69BA-4027-8DBA-7BD1B67BFECD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewSite_API", "ReviewSite_WebAPI\ReviewSite_API.csproj", "{9601A5D7-69BA-4027-8DBA-7BD1B67BFECD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReviewSite_WebAPI.Tests", "ReviewSite_WebAPI.Tests\ReviewSite_WebAPI.Tests.csproj", "{56AA337B-7211-4B30-B34A-104CCCEF1FB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewSite_API.Tests", "ReviewSite_WebAPI.Tests\ReviewSite_API.Tests.csproj", "{56AA337B-7211-4B30-B34A-104CCCEF1FB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReviewSite_Web", "ReviewSite_Web\ReviewSite_Web.csproj", "{34AEFF42-5077-46E5-B982-5C0379A223DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{56AA337B-7211-4B30-B34A-104CCCEF1FB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56AA337B-7211-4B30-B34A-104CCCEF1FB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56AA337B-7211-4B30-B34A-104CCCEF1FB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34AEFF42-5077-46E5-B982-5C0379A223DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34AEFF42-5077-46E5-B982-5C0379A223DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34AEFF42-5077-46E5-B982-5C0379A223DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34AEFF42-5077-46E5-B982-5C0379A223DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

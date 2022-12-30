@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "o7HRyWaM1U81BSVVK7aipNwfIrgr9F4DPcSCNJfxMQtZUfuoxBGXxEfUTGzVxexZCIYG9iXjYc68DfSn+KfX+A==",
+  "dgSpecHash": "hePVUsOOcRZplmQx9EXLOg/S5LjoSp8ZLHhxX1iI6EMhfa5SfSvtLZ2oSLNS47En/GMTV8sB5HgA6dI8TjOKqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\ReviewSite_WebAPI.Tests.csproj",
+  "projectFilePath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\ReviewSite_API.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
