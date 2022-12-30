@@ -1597,7 +1597,7 @@
           }
         }
       },
-      "ReviewSite_API/1.0.0": {
+      "ReviewSite_WebAPI/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -1610,10 +1610,10 @@
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "compile": {
-          "bin/placeholder/ReviewSite_API.dll": {}
+          "bin/placeholder/ReviewSite_WebAPI.dll": {}
         },
         "runtime": {
-          "bin/placeholder/ReviewSite_API.dll": {}
+          "bin/placeholder/ReviewSite_WebAPI.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
@@ -4055,10 +4055,10 @@
         "version.txt"
       ]
     },
-    "ReviewSite_API/1.0.0": {
+    "ReviewSite_WebAPI/1.0.0": {
       "type": "project",
-      "path": "../ReviewSite_WebAPI/ReviewSite_API.csproj",
-      "msbuildProject": "../ReviewSite_WebAPI/ReviewSite_API.csproj"
+      "path": "../ReviewSite_WebAPI/ReviewSite_WebAPI.csproj",
+      "msbuildProject": "../ReviewSite_WebAPI/ReviewSite_WebAPI.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -4068,7 +4068,7 @@
       "Moq >= 4.18.4",
       "NUnit >= 3.13.3",
       "NUnit3TestAdapter >= 4.3.1",
-      "ReviewSite_API >= 1.0.0"
+      "ReviewSite_WebAPI >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -4078,9 +4078,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\ReviewSite_API.Tests.csproj",
-      "projectName": "ReviewSite_API.Tests",
-      "projectPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\ReviewSite_API.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\ReviewSite_WebAPI.Tests.csproj",
+      "projectName": "ReviewSite_WebAPI.Tests",
+      "projectPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\ReviewSite_WebAPI.Tests.csproj",
       "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI.Tests\\obj\\",
       "projectStyle": "PackageReference",
@@ -4103,8 +4103,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_API.csproj": {
-              "projectPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_API.csproj"
+            "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_WebAPI.csproj": {
+              "projectPath": "C:\\Users\\admin\\source\\repos\\ReviewSite\\ReviewSite_WebAPI\\ReviewSite_WebAPI.csproj"
             }
           }
         }
