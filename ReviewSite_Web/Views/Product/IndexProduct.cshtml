@@ -29,8 +29,8 @@
                     <td>@item.Name</td>
                     <td>@item.Description</td>
                     <td>
-                        <a asp-controller="Product" asp-action="UpdateProduct" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                        <a asp-controller="Product" asp-action="DeleteProduct" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        <a asp-controller="Product" asp-action="UpdateProduct" asp-route-productId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-controller="Product" asp-action="DeleteProduct" asp-route-productId="@item.Id" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                     </td>
                 </tr>
             }
