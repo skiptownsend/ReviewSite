@@ -10,7 +10,7 @@ namespace ReviewSite_Web
         {
             CreateMap<ProductDTO, ProductCreateDTO>().ReverseMap();
             CreateMap<ProductDTO, ProductUpdateDTO>().ReverseMap();
-
+            
             CreateMap<ProductReviewDTO, ProductReviewCreateDTO>().ReverseMap();
             CreateMap<ProductReviewDTO, ProductReviewUpdateDTO>().ReverseMap();
         }

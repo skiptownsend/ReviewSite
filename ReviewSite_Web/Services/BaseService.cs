@@ -2,7 +2,6 @@
 using ReviewSite_Utility;
 using ReviewSite_Web.Models;
 using ReviewSite_Web.Services.IServices;
-using System.Net.Sockets;
 using System.Text;
 
 namespace ReviewSite_Web.Services
@@ -16,7 +15,6 @@ namespace ReviewSite_Web.Services
             this.responseModel = new();
             this.httpClient = httpClient;
         }
-
         public async Task<T> SendAsync<T>(APIRequest apiRequest)
         {
             try
@@ -48,13 +46,13 @@ namespace ReviewSite_Web.Services
 
                 HttpResponseMessage apiResponse = null;
 
-                apiResponse = await client.SendAsync(message);
+                apiResponse = await client.SendAsync(message); 
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
                 var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
                 return APIResponse;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var dto = new APIResponse
                 {

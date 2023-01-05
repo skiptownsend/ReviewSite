@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "UvOTYXwoESoPo3LB+qDmQfeVtCAYXANJJ3ohpBCB2Ko=",
-  "Source": "ReviewSite_API",
-  "BasePath": "_content/ReviewSite_API",
+  "Hash": "hTIAJ39PGAgGCQjdkPSXliptd+gg2twqsJpCwSngzRM=",
+  "Source": "ReviewSite_WebAPI",
+  "BasePath": "_content/ReviewSite_WebAPI",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

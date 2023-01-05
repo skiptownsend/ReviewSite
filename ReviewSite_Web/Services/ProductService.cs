@@ -58,7 +58,7 @@ namespace ReviewSite_Web.Services
             {
                 ApiType = SD.ApiType.PUT,
                 Data = dto,
-                Url = productUrl + "/api/ProductAPI/" + dto.Id
+                Url = productUrl + "/api/ProductAPI" + dto.Id
             });
         }
     }
