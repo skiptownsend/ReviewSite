@@ -9,6 +9,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 builder.Services.AddHttpClient<IProductService, ProductService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddHttpClient<IProductReviewService, ProductReviewService>();
+builder.Services.AddScoped<IProductReviewService, ProductReviewService>();
 
 var app = builder.Build();
 

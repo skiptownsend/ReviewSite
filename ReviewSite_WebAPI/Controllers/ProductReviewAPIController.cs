@@ -35,7 +35,7 @@ namespace ReviewSite_WebAPI.Controllers
         {
             try
             {
-                IEnumerable<ProductReview> productReviewList = await _dbProductReview.GetAllAsync();
+                IEnumerable<ProductReview> productReviewList = await _dbProductReview.GetAllAsync(includeProperties:"Product");
                 _response.Result = _mapper.Map<List<ProductReviewDTO>>(productReviewList);
                 _response.StatusCode = HttpStatusCode.OK;
                 return Ok(_response);

@@ -9,5 +9,6 @@ namespace ReviewSite_WebAPI.Models.DTO
         public string ReviewerName { get; set; }
         public string Review { get; set; }
         public DateTime CreatedDate { get; set; }
+        public ProductDTO Product { get; set; }
     }
 }
