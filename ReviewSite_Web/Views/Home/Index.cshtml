@@ -1,8 +1,28 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.AspNetCore.Components
+@model IEnumerable<ReviewSite_Web.Models.DTO.ProductDTO>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+ <img class="d-block w-100" src="./images/home_welcome.png" style="border-radius:20px; border 1px solid #ffffff" alt="">
+
+<hr />
+<div class="row" styel="--bs-gutter-x:0">
+    @foreach(var product in Model){
+        <div class="p-4 col-md-12 col-lg-6">
+            <div class="row" style="border-radius:20px">
+                <img class="d-block w-100" style="border-radius:20px;" src="@product.ImageUrl" alt="First Slide">
+            </div>
+            <div class="col-8">
+                <p class="card-title text-warning" style="font-size:xx-large">@product.Name</p>
+                <p class="card-text">
+                    @((MarkupString)product.Description)
+                </p>
+            </div>
+            <div class="col-12">
+                <div class="row pb-3 pt-2">
+                    <div class="col-4">
+                        <a href="" class="btn btn-success form-control btn-block">Write a Review</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>
