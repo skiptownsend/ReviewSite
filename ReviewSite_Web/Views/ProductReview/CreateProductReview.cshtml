@@ -1,0 +1,47 @@
+﻿@model ReviewSite_Web.Models.VM.ProductReviewCreateVM
+
+<form asp-action="CreateProductReview">
+    <br />
+    <div class="container border p-3">
+        <h1 class="text-primary">Create Product</h1>
+        <hr />
+
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="col-2">
+                <label asp-for="ProductReview.ProductId" class="control-label pt-2" style="font-size:20px;">Product Name</label>
+            </div>
+            <div class="col-10 pb-3">
+                <select asp-for="ProductReview.ProductId" class="form-control" asp-items="@Model.ProductList">
+                    <option disabled selected>--Select Product--</option>
+                </select>
+                <span asp-validation-for="ProductReview.ProductId" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="ProductReview.ReviewerName" class="control-label pt-2" style="font-size:20px;">Your Name</label>
+            </div>
+            <div class="col-10 pb-3">
+                <input asp-for="ProductReview.ReviewerName" class="form-control" />
+                <span asp-validation-for="ProductReview.ReviewerName" class="text-danger"></span>
+            </div>
+            <div class="col-2">
+                <label asp-for="ProductReview.Review" class="control-label pt-2" style="font-size:20px;">Product Review</label>
+            </div>
+            <div class="col-10 pb-3">
+                <textarea asp-for="ProductReview.Review" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="ProductReview.Review" class="text-danger"></span>
+            </div>
+            <div class="col-5 offset-2">
+                <a asp-action="IndexProductReview" asp-controller="ProductReview" class="btn-primary btn form-control">Back to Product Review List</a>
+            </div>
+            <div class="col-5">
+                <input type="submit" value="Create" class="btn btn-success form-control" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
