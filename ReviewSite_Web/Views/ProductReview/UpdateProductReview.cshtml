@@ -1,14 +1,14 @@
-﻿@model ReviewSite_Web.Models.VM.ProductReviewCreateVM
+﻿@model ReviewSite_Web.Models.VM.ProductReviewUpdateVM
 
-<form asp-action="CreateProductReview">
+<form asp-action="UpdateProductReview">
     <br />
     <div class="container border p-3">
-        <h1 class="text-primary">Write a Product Review</h1>
+        <h1 class="text-primary">Update a Review</h1>
         <hr />
 
         <div class="row">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
+
             <div class="col-2">
                 <label asp-for="ProductReview.ProductId" class="control-label pt-2" style="font-size:20px;">Product Name</label>
             </div>
@@ -24,7 +24,7 @@
             </div>
             <div class="col-10 pb-3">
                 <input asp-for="ProductReview.ReviewerName" class="form-control" />
-                
+
                 <span asp-validation-for="ProductReview.ReviewerName" class="text-danger"></span>
             </div>
 
@@ -40,12 +40,12 @@
                 <a asp-action="IndexProductReview" asp-controller="ProductReview" class="btn-primary btn form-control">Back to Product Review List</a>
             </div>
             <div class="col-5">
-                <input type="submit" value="Create" class="btn btn-success form-control" />
+                <input type="submit" value="Update" class="btn btn-success form-control" />
             </div>
         </div>
     </div>
 </form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
 }

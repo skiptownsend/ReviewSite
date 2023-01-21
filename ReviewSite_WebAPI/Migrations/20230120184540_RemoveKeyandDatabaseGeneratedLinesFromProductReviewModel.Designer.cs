@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReviewSite_WebAPI.Data;
 
@@ -11,9 +12,10 @@ using ReviewSite_WebAPI.Data;
 namespace ReviewSite_WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230120184540_RemoveKeyandDatabaseGeneratedLinesFromProductReviewModel")]
+    partial class RemoveKeyandDatabaseGeneratedLinesFromProductReviewModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +55,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1358),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7582),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/white_t-shirt.jpg",
                             Name = "White T-Shirt",
@@ -62,7 +64,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1384),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7617),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/black_t-shirt.jpg",
                             Name = "Black T-Shirt",
@@ -71,7 +73,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1386),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7619),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/red_t-shirt.jpg",
                             Name = "Red T-Shirt",
@@ -80,7 +82,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1388),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7621),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/blue_t-shirt.jpg",
                             Name = "Blue T-Shirt",
@@ -89,7 +91,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1390),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7623),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/maroon_t-shirt.jpg",
                             Name = "Maroon T-Shirt",
@@ -98,7 +100,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1391),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7624),
                             Description = "Lorem ipsum dolor sit amet.",
                             ImageUrl = "./Images/yellow_t-shirt.jpg",
                             Name = "Yellow T-Shirt",
@@ -139,7 +141,7 @@ namespace ReviewSite_WebAPI.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 1, 20, 12, 12, 25, 481, DateTimeKind.Local).AddTicks(1473),
+                            CreatedDate = new DateTime(2023, 1, 20, 11, 45, 39, 862, DateTimeKind.Local).AddTicks(7704),
                             ProductId = 1,
                             Review = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sociis natoque penatibus et magnis dis parturient montes nascetur. Nulla aliquet porttitor lacus luctus accumsan tortor posuere ac.",
                             ReviewerName = "John Smith",

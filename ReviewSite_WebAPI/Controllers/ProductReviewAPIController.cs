@@ -97,7 +97,7 @@ namespace ReviewSite_WebAPI.Controllers
                 }
                 if(await _dbProduct.GetAsync(u => u.Id == createDTO.ProductId) == null)
                 {
-                    ModelState.AddModelError("CustomError", "Product Id is Invalid!");
+                    ModelState.AddModelError("ErrorMessages", "Product Id is Invalid!");
                     return BadRequest(ModelState);
                 }
                 ProductReview productReview = _mapper.Map<ProductReview>(createDTO);
@@ -163,7 +163,7 @@ namespace ReviewSite_WebAPI.Controllers
                 }
                 if (await _dbProduct.GetAsync(u => u.Id == updateDTO.ProductId) == null)
                 {
-                    ModelState.AddModelError("CustomError", "Product Id is Invalid!");
+                    ModelState.AddModelError("ErrorMessages", "Product Id is Invalid!");
                     return BadRequest(ModelState);
                 }
                 ProductReview productReview = _mapper.Map<ProductReview>(updateDTO);

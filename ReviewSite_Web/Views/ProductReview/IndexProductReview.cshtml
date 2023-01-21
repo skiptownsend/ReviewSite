@@ -34,8 +34,8 @@
                     <td>@item.Review</td>
                     <td>@item.ReviewerName</td>
                     <td>
-                        <a asp-controller="ProductReview" asp-action="UpdateProductReview" asp-route-productReviewId="@item.Id" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
-                        <a asp-controller="ProductReview" asp-action="DeleteProductReview" asp-route-productReviewId="@item.Id" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
+                        <a asp-controller="ProductReview" asp-action="UpdateProductReview" asp-route-productReviewId="@item.ProductId" class="btn btn-success"><i class="bi bi-pencil-square"></i></a>
+                        <a asp-controller="ProductReview" asp-action="DeleteProductReview" asp-route-productReviewId="@item.ProductId" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a>
                     </td>
                 </tr>
             }
